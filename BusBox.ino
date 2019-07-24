@@ -28,20 +28,23 @@ static const char unused = 'z';
 //=====[ PIN CONSTANTS ]=====
 // Double check that circuitPins and circuitTypes are same length
 
-// const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, refrigeration, redOverGreenLight, navigationLight, instrument, deckLight, unused }; // aft
+const char circuitTypes[] = { fan, engineeringLight, outlet, deckLight, ventilation, unused, refrigeration, redOverGreenLight, navigationLight, instrument, comfortLight, entertainment }; // aft
 // const char circuitTypes[] = { ... }; // mid ships
-static const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, hydraulic, internet, anchorLight, steamingLight, deckLight, radio }; // forward
+// const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, hydraulic, internet, anchorLight, steamingLight, deckLight, radio }; // forward
 
-// const int circuitPins[] = { 21, 22, 23, 13, 12, 11, 20, 19, 18, 10, 9, 8 }; // aft
+const int circuitPins[] = { 21, 22, 23, 13, 12, 11, 20, 19, 18, 10, 9, 8 }; // aft
 // const int circuitPins[] =   { ... }; // mid ships
-static const int circuitPins[] = { 8, 9, 10, 11, 12, 13, 18, 19, 20, 21, 22, 23 }; // forward
+// const int circuitPins[] = { 8, 9, 10, 11, 12, 13, 18, 19, 20, 21, 22, 23 }; // forward
 
 const int numberOfCircuits = 12;
 
 //=====[ VARIABLES ]=====
 XBee xbee = XBee();
 char command[256];
+
 ZBRxResponse rx = ZBRxResponse();
+ModemStatusResponse msr = ModemStatusResponse();
+
 char *ptr = NULL;
 char circuit;
 int requestedState;
@@ -93,6 +96,21 @@ bool fetchCommand(void) {
       Serial.print("Not what we were expecting. ApiId: ");
       Serial.println(xbee.getResponse().getApiId());
     }
+  } else if (xbee.getResponse().getApiId() == MODEM_STATUS_RESPONSE) {
+    
+    xbee.getResponse().getModemStatusResponse(msr);
+    // the local XBee sends this response on certain events, like association/dissociation
+        
+    if (msr.getStatus() == ASSOCIATED) {
+      
+      Serial.println("Modem associated");
+    } else if (msr.getStatus() == DISASSOCIATED) {
+
+      Serial.println("Modem disassociated");
+    } else {
+      
+      Serial.println("Modem something?");
+    }
   } else if (xbee.getResponse().isError()) {
 
     Serial.print("Error reading packet.  Error code: ");
@@ -115,7 +133,7 @@ void processCommand(void) {
   while (ptr != NULL) {
 
     // Split the command in two values
-    sscanf(ptr, "%c %d", &circuit, &requestedState);
+    sscanf(ptr, "%c%d", &circuit, &requestedState);
 
     for (int i = 0; i < numberOfCircuits; i++) {
 
