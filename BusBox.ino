@@ -49,7 +49,7 @@ const int numberOfCircuits = 12;
 
 //=====[ VARIABLES ]=====
 
-char command[25];
+char command[255];
 uint8_t option = 0;
 
 //=====[ SETUP ]=====
@@ -66,7 +66,6 @@ void setup() {
 
   Serial1.begin(9600);
   xbee.setSerial(Serial1);
-);
 }
 
 //=====[ PROGRAM ]=====
