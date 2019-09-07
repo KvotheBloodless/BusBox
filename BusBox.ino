@@ -25,19 +25,21 @@ static const char refrigeration = 'l';
 static const char anchorLight = 'm';
 static const char steamingLight = 'n';
 static const char redOverGreenLight = 'o';
-static const char deckLight = 'p';
+static const char deckLightForward = 'p';
 static const char navigationLight = 'q';
 static const char autopilot = 'r';
 static const char instrument = 's';
 static const char radio = 't';
+static const char deckLightCockpit = 'u';
+static const char deckLightAft = 'v';
 static const char unused = 'z';
 
 //=====[ PIN CONSTANTS ]=====
 // Double check that circuitPins and circuitTypes are same length
 
-// const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, refrigeration, redOverGreenLight, navigationLight, instrument, deckLight, unused }; // aft
+// const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, refrigeration, redOverGreenLight, navigationLight, instrument, deckLightCockpit, deckLightAft }; // aft
 // const char circuitTypes[] = { ... }; // mid ships
-static const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, hydraulic, internet, anchorLight, steamingLight, deckLight, radio }; // forward
+static const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, hydraulic, internet, anchorLight, steamingLight, deckLightForward, radio }; // forward
 
 // const int circuitPins[] = { 21, 22, 23, 13, 12, 11, 20, 19, 18, 10, 9, 8 }; // aft
 // const int circuitPins[] =   { ... }; // mid ships
