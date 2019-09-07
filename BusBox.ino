@@ -7,6 +7,8 @@ XBeeResponse response = XBeeResponse();
 
 Rx16Response rx16 = Rx16Response();
 Rx64Response rx64 = Rx64Response();
+ZBRxResponse rxZB = ZBRxResponse();
+
 
 //=====[ CONSTANTS ]=====
 static const int bSize = 64;
@@ -84,18 +86,23 @@ bool fetchCommand(void) {
     
   if (xbee.getResponse().isAvailable()) {
       
-    if (xbee.getResponse().getApiId() == RX_16_RESPONSE || xbee.getResponse().getApiId() == RX_64_RESPONSE) {
+    if (xbee.getResponse().getApiId() == RX_16_RESPONSE || xbee.getResponse().getApiId() == RX_64_RESPONSE || xbee.getResponse().getApiId() == ZB_RX_RESPONSE) {
         
       if (xbee.getResponse().getApiId() == RX_16_RESPONSE) {
                 
         xbee.getResponse().getRx16Response(rx16);
         option = rx16.getOption();
         strcpy(command, rx16.getData());
-      } else {
+      } else if (xbee.getResponse().getApiId() == RX_64_RESPONSE) {
                 
         xbee.getResponse().getRx64Response(rx64);
         option = rx64.getOption();
         strcpy(command, rx64.getData());
+      } else {
+                
+        xbee.getResponse().getZBRxResponse(rxZB);
+        option = rxZB.getOption();
+        strcpy(command, rxZB.getData());
       }
 
       if (false) { // Do some validation here
