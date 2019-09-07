@@ -66,7 +66,6 @@ void setup() {
 
   Serial1.begin(9600);
   xbee.setSerial(Serial1);
-);
 }
 
 //=====[ PROGRAM ]=====
