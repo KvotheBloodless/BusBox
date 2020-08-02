@@ -39,13 +39,13 @@ static const char unused = 'z';
 //=====[ PIN CONSTANTS ]=====
 // Double check that circuitPins and circuitTypes are same length
 
-// const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, refrigeration, redOverGreenLight, navigationLight, instrument, deckLightCockpit, deckLightAft }; // aft
-// const char circuitTypes[] = { ... }; // mid ships
-static const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, hydraulic, internet, anchorLight, steamingLight, deckLightForward, radio }; // forward
+// static const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, refrigeration, redOverGreenLight, navigationLight, instrument, deckLightCockpit, deckLightAft }; // aft
+static const char circuitTypes[] = { comfortLight, engineeringLight, hydraulic, outlet, fan, freshWaterPump, wasteWaterPump, washDownPump, refrigeration, autopilot, instrument, radio }; // mid ships
+// static const char circuitTypes[] = { comfortLight, engineeringLight, outlet, fan, ventilation, entertainment, hydraulic, internet, anchorLight, steamingLight, deckLightForward, radio }; // forward
 
-// const int circuitPins[] = { 21, 22, 23, 13, 12, 11, 20, 19, 18, 10, 9, 8 }; // aft
-// const int circuitPins[] =   { ... }; // mid ships
-static const int circuitPins[] = { 8, 9, 10, 11, 12, 13, 18, 19, 20, 21, 22, 23 }; // forward
+// static const int circuitPins[] = { 21, 22, 23, 13, 12, 11, 20, 19, 18, 10, 9, 8 }; // aft
+static const int circuitPins[] =   { 8, 9, 10, 11, 12, 13, 18, 19, 20, 21, 22, 23 }; // mid ships
+// static const int circuitPins[] = { 8, 9, 10, 11, 12, 13, 18, 19, 20, 21, 22, 23 }; // forward
 
 const int numberOfCircuits = 12;
 
